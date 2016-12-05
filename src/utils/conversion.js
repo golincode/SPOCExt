@@ -1,6 +1,4 @@
-import { Utils } from './utils';
-
-Utils.Conversion = class {
+class Conversion {
 	static objToQueryString(obj) {
 		var str = '';
 
@@ -16,4 +14,4 @@ Utils.Conversion = class {
 	}
 };
 
-export { Utils };
+export default Conversion;

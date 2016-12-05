@@ -1,6 +1,4 @@
-import { Utils } from './utils';
-
-Utils.Url = class {
+class Url {
     static getQueryString(variable, query) {
         query = query ? query = query.split('?')[1] : window.location.search.substring(1);
 
@@ -23,11 +21,11 @@ Utils.Url = class {
     };
 
     static AppWebUrl(url) {
-        return decodeURIComponent(Utils.Url.getQueryString('SPAppWebUrl'));
+        return decodeURIComponent(this.getQueryString('SPAppWebUrl'));
     };
 
     static HostWebUrl(url) {
-        return decodeURIComponent(Utils.Url.getQueryString('SPHostUrl'));
+        return decodeURIComponent(this.getQueryString('SPHostUrl'));
     };
 
     static isSameDomain(url) {
@@ -57,4 +55,4 @@ Utils.Url = class {
     };
 };
 
-export { Utils };
+export default Url;

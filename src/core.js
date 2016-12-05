@@ -1,4 +1,9 @@
-import { ListItems } from './sp-listitems';
+import ListItems from './sp-listitems';
+import Delve from './sp-delve';
+import Files from './sp-files';
+import Lists from './sp-lists';
+import Search from './sp-search';
+import Profile from './sp-users';
 
 class SPOC {
 	constructor() {
@@ -23,7 +28,12 @@ SPOC.SP = class {
 SPOC.SP.Site = class {
 	constructor(url) {
 		this.url = url ? url : window._spPageContextInfo.webAbsoluteUrl;
+
 		this.ListItems = ListItems;
+		this.Delve = Delve;
+		this.Files = Files;
+		this.Lists = Lists;
+		this.Search = Search;
 	}
 };
 
@@ -31,6 +41,8 @@ SPOC.SP.User = class {
 	constructor(username) {
 		this.id = username ? username : window._spPageContextInfo.userId;
 		this.loginName = username ? username : window._spPageContextInfo.userLoginName;
+
+		this.Profile = Profile;
 	}
 };
 

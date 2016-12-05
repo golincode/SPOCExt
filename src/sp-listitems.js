@@ -1,7 +1,4 @@
-import { Conversion } from './utils/conversion';
-import { Request } from './utils/request';
-import { Objects } from './utils/objects';
-import { SPHelper } from './utils/sphelper';
+import Utils from './utils/utils';
 
 function ListItems(listTitle) {
     var site = this,
@@ -10,16 +7,16 @@ function ListItems(listTitle) {
     methods.query = function(settings, cache, headers) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29/items';
 
-        listUrl += settings ? '?' + Conversion.objToQueryString(settings) : '';
+        listUrl += settings ? '?' + Utils.Conversion.objToQueryString(settings) : '';
 
-        return Request.get(listUrl, cache);
+        return Utils.Request.get(listUrl, cache);
     };
 
     methods.queryCSOM = function(camlQuery) {
         return new Promise(function(resolve, reject) {
             var ctx = new SP.ClientContext(site.url),
                 list = ctx.get_web().get_lists().getByTitle(listTitle),
-                query, currentItem = {}, pageItem;
+                query;
 
             if (camlQuery) {
                 query = new SP.CamlQuery();
@@ -34,7 +31,7 @@ function ListItems(listTitle) {
             ctx.load(items);
 
             ctx.executeQueryAsync(function() {
-                var result = items.get_data().map(function(i){
+                var result = items.get_data().map(function(i) {
                     return i.get_fieldValues();   
                 });
 
@@ -55,39 +52,39 @@ function ListItems(listTitle) {
             };
 
         if (data) {
-            defaults = Objects.merge(defaults, data);
+            defaults = Utils.Objects.merge(defaults, data);
         }
 
-        return Request.post(listUrl, defaults);
+        return Utils.Request.post(listUrl, defaults);
     };
 
     methods.update = function(id, data, library) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29/items(' + id + ')',
             defaults = {
                 __metadata: {
-                    'type': SPHelper.getListItemType(listTitle, library)
+                    'type': Utils.SPHelper.getListItemType(listTitle, library)
                 }
             };
 
         if (data) {
-            defaults = Objects.merge(defaults, data);
+            defaults = Utils.Objects.merge(defaults, data);
         }
 
-        return Request.put(listUrl, defaults);
+        return Utils.Request.put(listUrl, defaults);
     };
 
     methods.delete = function(id, library) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29/items(' + id + ')',
             defaults = {
                 __metadata: {
-                    'type': SPHelper.getListItemType(listTitle, library)
+                    'type': Utils.SPHelper.getListItemType(listTitle, library)
                 }
             };
 
-        return Request.delete(listUrl, defaults);
+        return Utils.Request.delete(listUrl, defaults);
     };
 
     return methods;
 };
 
-export { ListItems };
+export default ListItems;

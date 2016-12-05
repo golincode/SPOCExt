@@ -1,9 +1,9 @@
-import { Utils } from './utils';
-import { Strings } from './strings';
+import Utils from './utils';
 
-Utils.SPHelper = class {
+class SPHelper {
     static getListItemType(name, library) {
         var meta = library ? "Item" : "ListItem";
+
     	name = name[0].toUpperCase() + name.substring(1);
 
         return "SP.Data." + name.replace(/ /g, '_x0020_') + meta;
@@ -17,15 +17,14 @@ Utils.SPHelper = class {
         if (url.toLowerCase().indexOf('WopiFrame.aspx') > -1) {
             return url;
         } 
-        else {
-            var ext = Strings.getFileExtension(url);
 
-            if (ext === 'docx' || ext === 'pptx' || ext === 'xlsx'){
-                return site.url + '/_layouts/15/WopiFrame.aspx?sourcedoc=' + url;
-            } 
+        var ext = Utils.Strings.getFileExtension(url);
 
-            return url;
-        }
+        if (ext === 'docx' || ext === 'pptx' || ext === 'xlsx') {
+            return window._spPageContextInfo.webAbsoluteUrl + '/_layouts/15/WopiFrame.aspx?sourcedoc=' + url;
+        } 
+
+        return url;
     };
 
     static formatSearchResponse(data) {
@@ -49,5 +48,5 @@ Utils.SPHelper = class {
     };
 };
 
-export { Utils };
+export default SPHelper;
 

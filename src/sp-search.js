@@ -1,32 +1,26 @@
-// SharePoint List Functionlity
+import Utils from './utils/utils';
 
-SPOC.SP.Site.prototype.Search = function(searchTerm) {
+function Search(searchTerm) {
+    var site = this,
+        methods = {};
 
-    // save reference to this
-    var site = this;
-
-    // Create object to store public methods
-    var methods = {};
-
-    /**
-     * Queries a SharePont list via REST API
-     * @params  Object query filter paramators in obj format
-     * @return  promise
-     */
     methods.query = function(settings, cache) {
         return new Promise(function(resolve, reject) {
-            var searchUrl = site.url + '/_api/search/query?querytext=%27' + searchTerm + ' +path:' + site.url + '%27';
-            searchUrl += settings ? '?' + SPOC.Utils.Conversion.objToQueryString(settings) : '';
+            var searchUrl = site.url + '/_api/search/query?querytext=%27' + searchTerm + 
+                                ' +path:' + site.url + '%27';
 
-            SPOC.Utils.Request.get(searchUrl, cache).then(function(result) {
-                result = SPOC.Utils.SP.formatSearchResponse(result);
+            searchUrl += settings ? '?' + Utils.Conversion.objToQueryString(settings) : '';
+
+            Utils.Request.get(searchUrl, cache).then(function(result) {
+                result = Utils.SPHelper.formatSearchResponse(result);
                 resolve(result);
             }, function(err) {
                 reject(err);
             });
         });
-
     };
 
     return methods;
 };
+
+export default Search;

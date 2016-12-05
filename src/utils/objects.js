@@ -1,10 +1,6 @@
-import { Utils } from './utils';
-
-Utils.Objects = class {
+class Objects {
     static findObjectByProperty(data, prop, value) {
-        var i;
-
-        for (i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             if (data[i][prop] === value) {
                 return data[i];
             }
@@ -16,14 +12,14 @@ Utils.Objects = class {
     static merge(obj1, obj2) {
         for (var p in obj2) {
             try {
-                if (obj2[p].constructor == Object) {
-                    obj1[p] = MergeRecursive(obj1[p], obj2[p]);
+                if (obj2[p].constructor === Object) {
+                    obj1[p] = this.merge(obj1[p], obj2[p]);
                 } 
                 else {
                     obj1[p] = obj2[p];
                 }
-            } 
-            catch(e) {
+            }
+            catch (e) {
                 obj1[p] = obj2[p];
             }
         }
@@ -32,4 +28,4 @@ Utils.Objects = class {
     };
 };
 
-export { Utils };
+export default Objects;

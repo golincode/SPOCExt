@@ -1,23 +1,21 @@
-import { Utils } from './utils';
-import { Storage } from './storage';
-import { Url } from './url';
+import Utils from './utils';
 
-Utils.Request = class {
+class Request {
     static get(url, cacheResult) {
         return new Promise(function(resolve, reject) {
-            var cache = Storage.get('SPOC-' + url);
+            var cache = Utils.Storage.get('SPOC-' + url);
 
             if (cache && cacheResult) {
                 resolve(cache);
             } 
             else {
-                if (!Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
-                    url = Url.convertToXDomain(url);
+                if (!Utils.Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
+                    url = Utils.Url.convertToXDomain(url);
 
-                    var appweburl = Url.AppWebUrl(),
-                        hostweburl = Url.HostWebUrl();
+                    var appweburl = Utils.Url.AppWebUrl(),
+                        hostweburl = Utils.Url.HostWebUrl();
 
-                    Utils.Request.loadRequestor(hostweburl + '/_layouts/15/SP.RequestExecutor.js').then(function() {
+                    this.Request.loadRequestor(hostweburl + '/_layouts/15/SP.RequestExecutor.js').then(function() {
                         var executor = new SP.RequestExecutor(appweburl);
 
                         executor.executeAsync({
@@ -70,13 +68,13 @@ Utils.Request = class {
 
     static post(url, data, isFile) {
         return new Promise(function(resolve, reject) {
-            if (!Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
-                url = Url.convertToXDomain(url);
+            if (!Utils.Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
+                url = Utils.Url.convertToXDomain(url);
 
-                var appweburl = Url.AppWebUrl(),
-                    hostweburl = Url.HostWebUrl();
+                var appweburl = Utils.Url.AppWebUrl(),
+                    hostweburl = Utils.Url.HostWebUrl();
 
-                Utils.Request.loadRequestor(hostweburl + '/_layouts/15/SP.RequestExecutor.js').then(function() {
+                this.Request.loadRequestor(hostweburl + '/_layouts/15/SP.RequestExecutor.js').then(function() {
                     var executor = new SP.RequestExecutor(appweburl),
                         headers = {
                             "Accept": "application/json; odata=verbose",
@@ -137,13 +135,13 @@ Utils.Request = class {
 
     static put(url, data) {
         return new Promise(function(resolve, reject) {
-            if (!Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
-                url = Url.convertToXDomain(url);
+            if (!Utils.Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
+                url = Utils.Url.convertToXDomain(url);
 
-                var appweburl = Url.AppWebUrl(),
-                    hostweburl = Url.HostWebUrl();
+                var appweburl = Utils.Url.AppWebUrl(),
+                    hostweburl = Utils.Url.HostWebUrl();
 
-                Utils.Request.loadRequestor(hostweburl + '/_layouts/15/SP.RequestExecutor.js').then(function() {
+                this.Request.loadRequestor(hostweburl + '/_layouts/15/SP.RequestExecutor.js').then(function() {
                     var executor = new SP.RequestExecutor(appweburl),
                         headers = {
                             "Accept": "application/json; odata=verbose",
@@ -199,13 +197,13 @@ Utils.Request = class {
 
     static delete(url, data) {
         return new Promise(function(resolve, reject) {
-            if (!Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
-                url = Url.convertToXDomain(url);
+            if (!Utils.Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
+                url = Utils.Url.convertToXDomain(url);
 
-                var appweburl = Url.AppWebUrl(),
-                    hostweburl = Url.HostWebUrl();
+                var appweburl = Utils.Url.AppWebUrl(),
+                    hostweburl = Utils.Url.HostWebUrl();
 
-                Utils.Request.loadRequestor(hostweburl + '/_layouts/15/SP.RequestExecutor.js').then(function() {
+                this.Request.loadRequestor(hostweburl + '/_layouts/15/SP.RequestExecutor.js').then(function() {
                     var executor = new SP.RequestExecutor(appweburl), 
                         headers = {
                             "Accept": "application/json; odata=verbose",
@@ -281,4 +279,4 @@ Utils.Request = class {
     };
 };
 
-export { Utils };
+export default Request;

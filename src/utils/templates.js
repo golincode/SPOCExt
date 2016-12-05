@@ -1,6 +1,4 @@
-import { Utils } from './utils';
-
-Utils.Tpl = class {
+class Tpl {
     static getProperty(propertyName, obj) {
         var parts = propertyName.split("."),
             length = parts.length,
@@ -20,7 +18,7 @@ Utils.Tpl = class {
         if (matches && matches.length) {
             for (var i = 0, len = matches.length; i < len; i++) {
                 tpl = tpl.replace(new RegExp(matches[i], 'g'), 
-                            Utils.Tpl.getProperty(matches[i].replace(/{{|}}/g, ""), data));
+                            this.getProperty(matches[i].replace(/{{|}}/g, ""), data));
             }
         }
 
@@ -28,4 +26,4 @@ Utils.Tpl = class {
     };
 };
 
-export { Utils };
+export default Tpl;

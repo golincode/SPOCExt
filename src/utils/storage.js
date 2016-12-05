@@ -1,8 +1,6 @@
-import { Utils } from './utils';
-
-Utils.Storage = class {
+class Storage {
     static get(key, useLocalStorage) {
-        if (Utils.Storage.storageAvailable()) {
+        if (this.storageAvailable()) {
             var storageObj = useLocalStorage ? localStorage : sessionStorage;
 
             return JSON.parse(storageObj.getItem(key));
@@ -15,7 +13,7 @@ Utils.Storage = class {
     };
 
     static set(key, data, useLocalStorage) {
-        if (Utils.Storage.storageAvailable()) {
+        if (this.storageAvailable()) {
             var storageObj = useLocalStorage ? localStorage : sessionStorage;
 
             storageObj.setItem(key, (data === Object(data)) ? JSON.stringify(data) : data);
@@ -23,7 +21,7 @@ Utils.Storage = class {
     };
 
     static get(key, useLocalStorage) {
-        if (Utils.Storage.storageAvailable()) {
+        if (this.storageAvailable()) {
             var storageObj = useLocalStorage ? localStorage : sessionStorage;
 
             return JSON.parse(storageObj.getItem(key));
@@ -32,7 +30,7 @@ Utils.Storage = class {
     };
 
     static remove(key, useLocalStorage) {
-        if (Utils.Storage.storageAvailable()) {
+        if (this.storageAvailable()) {
             var storageObj = useLocalStorage ? localStorage : sessionStorage;
 
             storageObj.removeItem(key);
@@ -72,8 +70,8 @@ Utils.Storage = class {
     };
 
     static removeCookies(name) {
-        Utils.Storage.setCookies(name, '', -1);
+        this.setCookies(name, '', -1);
     };
 };
 
-export { Utils };
+export default Storage;

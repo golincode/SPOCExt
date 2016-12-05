@@ -1,6 +1,6 @@
 {
-  "name": "webpack-library-starter",
-  "version": "0.1.3",
+  "name": "A new version of SPOC",
+  "version": "0.0.1",
   "description": "Produce universal library with webpack and es6",
   "main": "lib/SPOCExt.js",
   "scripts": {
@@ -19,12 +19,13 @@
     "eslint": "1.7.2",
     "eslint-loader": "1.1.0",
     "mocha": "2.3.4",
+    "rsvp": "^3.3.3",
     "webpack": "1.12.9",
     "yargs": "3.32.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/krasimir/webpack-library-starter.git"
+    "url": "https://github.com/dmitrydyachenko/SPOCExt.git"
   },
   "keywords": [
     "webpack",
@@ -35,10 +36,10 @@
     "umd",
     "commonjs"
   ],
-  "author": "Krasimir Tsonev",
+  "author": "Dmitry Dyachenko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/krasimir/webpack-library-starter/issues"
+    "url": "https://github.com/dmitrydyachenko/SPOCExt/issues"
   },
-  "homepage": "https://github.com/krasimir/webpack-library-starter"
+  "homepage": "https://github.com/dmitrydyachenko/SPOCExt"
 }
