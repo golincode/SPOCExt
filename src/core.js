@@ -5,9 +5,12 @@ import Lists from './sp-lists';
 import Search from './sp-search';
 import Profile from './sp-users';
 
+import RSVP from 'rsvp';
+
 class SPOC {
 	constructor() {
 		this._name = 'SPOC';
+		window.Promise = window.Promise ? window.Promise : RSVP.Promise;
 	}
 
 	get name() {
