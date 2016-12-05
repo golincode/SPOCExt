@@ -92,10 +92,10 @@ function Files(filePath) {
         var url = site.url + filePath;
 
         if (newTab) {
-            window.open(Utils.SPHelper.convertToWebApp(url));
+            window.open(Utils.SP.convertToWebApp(url));
         } 
         else {
-            window.location.href = Utils.SPHelper.convertToWebApp(url);
+            window.location.href = Utils.SP.convertToWebApp(url);
         }
     };
 

@@ -62,7 +62,7 @@ function ListItems(listTitle) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29/items(' + id + ')',
             defaults = {
                 __metadata: {
-                    'type': Utils.SPHelper.getListItemType(listTitle, library)
+                    'type': Utils.SP.getListItemType(listTitle, library)
                 }
             };
 
@@ -77,7 +77,7 @@ function ListItems(listTitle) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29/items(' + id + ')',
             defaults = {
                 __metadata: {
-                    'type': Utils.SPHelper.getListItemType(listTitle, library)
+                    'type': Utils.SP.getListItemType(listTitle, library)
                 }
             };
 

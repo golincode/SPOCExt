@@ -32,7 +32,7 @@ function Lists(listTitle) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29',
             defaults = {
                 __metadata: {
-                    'type': Utils.SPHelper.getListItemType(listTitle)
+                    'type': Utils.SP.getListItemType(listTitle)
                 }
             };
 
@@ -47,7 +47,7 @@ function Lists(listTitle) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29',
             defaults = {
                 __metadata: {
-                    'type': Utils.SPHelper.getListItemType(listTitle)
+                    'type': Utils.SP.getListItemType(listTitle)
                 }
             };
 

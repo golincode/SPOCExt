@@ -1,6 +1,6 @@
 import Utils from './utils';
 
-class SPHelper {
+class SP {
     static getListItemType(name, library) {
         var meta = library ? "Item" : "ListItem";
 
@@ -48,5 +48,5 @@ class SPHelper {
     };
 };
 
-export default SPHelper;
+export default SP;
 

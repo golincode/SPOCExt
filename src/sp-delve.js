@@ -17,7 +17,7 @@ function Delve(userEmail) {
                                 userEmail + "%27&SelectProperties=%27UserName,DocId%27";
 
                 Utils.Request.get(searchUrl, cache).then(function(result) {
-                    result = Utils.SPHelper.formatSearchResponse(result);
+                    result = Utils.SP.formatSearchResponse(result);
 
                     if (result.length) {
                         if (result.length > 1) {
@@ -30,7 +30,7 @@ function Delve(userEmail) {
                                             actor + actions ? (", " + actions) : "" + ")";
 
                         Utils.Request.get(searchUrl, cache).then(function(board) {
-                            board = Utils.SPHelper.formatSearchResponse(board);
+                            board = Utils.SP.formatSearchResponse(board);
                             resolve(board);
                         }, function(err) {
                              reject(err);
@@ -50,7 +50,7 @@ function Delve(userEmail) {
                                     actions ? (", " + actions) : "" + ")";
 
                 Utils.Request.get(searchUrl, cache).then(function(board) {
-                    board = Utils.SPHelper.formatSearchResponse(board);
+                    board = Utils.SP.formatSearchResponse(board);
                     resolve(board);
                 }, function(err) {
                      reject(err);

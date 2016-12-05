@@ -12,7 +12,7 @@ function Search(searchTerm) {
             searchUrl += settings ? '?' + Utils.Conversion.objToQueryString(settings) : '';
 
             Utils.Request.get(searchUrl, cache).then(function(result) {
-                result = Utils.SPHelper.formatSearchResponse(result);
+                result = Utils.SP.formatSearchResponse(result);
                 resolve(result);
             }, function(err) {
                 reject(err);

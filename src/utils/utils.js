@@ -1,5 +1,5 @@
 import Conversion from './conversion';
-import SPHelper from './sphelper';
+import SP from './sp';
 import Request from './request';
 import Objects from './objects';
 import Storage from './storage';
@@ -19,7 +19,7 @@ class Utils {
 
 Utils.Conversion = Conversion;
 Utils.Request = Request;
-Utils.SPHelper = SPHelper;
+Utils.SP = SP;
 Utils.Objects = Objects;
 Utils.Storage = Storage;
 Utils.Strings = Strings;
