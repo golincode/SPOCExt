@@ -1,5 +1,5 @@
 {
-  "name": "A new version of SPOC",
+  "name": "SPOCExt",
   "version": "0.0.1",
   "description": "Produce universal library with webpack and es6",
   "main": "lib/SPOCExt.js",
