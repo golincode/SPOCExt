@@ -1,4 +1,4 @@
-# Webpack library starter
+# New version of SPOC with Webpack and ES6 approach
 
 Webpack based boilerplate for producing libraries (Input: ES6, Output: universal library)
 
