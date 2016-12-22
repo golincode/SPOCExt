@@ -1,1 +1,38 @@
-node_modules/*
+# OS
+.DS_Store
+Thumbs.db
+
+# Composer
+composer.phar
+composer.lock
+/vendor
+
+# Sass
+.sass-cache
+node_modules
+scss-lint-report.xml
+
+# Node
+/node_modules
+/npm-debug.log
+
+# Laravel
+/bootstrap/compiled.php
+/app/config/local
+
+# Hide generated files
+/public/_*
+/public/*.css
+!/public/_img # This is not ignored.
+/public/var/*
+/public/packages/*
+
+# Testing
+/report
+
+# WordPress
+/public/wp-config.php
+/public/wp-content/uploads
+
+# Bower
+assets/bower-packages/*
