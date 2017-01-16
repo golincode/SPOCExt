@@ -4,6 +4,7 @@ import Files from './sp-files';
 import Lists from './sp-lists';
 import Search from './sp-search';
 import Profile from './sp-users';
+import Utils from './utils/utils';
 
 import RSVP from 'rsvp';
 
@@ -48,5 +49,17 @@ SPOC.SP.User = class {
 		this.Profile = Profile;
 	}
 };
+
+SPOC.Utils = class {
+	constructor() {
+		this._name = 'Utils';
+	}
+
+	get name() {
+		return this._name;
+	}
+};
+
+SPOC.Utils = Utils;
 
 export default SPOC;
