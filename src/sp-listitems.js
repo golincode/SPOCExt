@@ -1,4 +1,5 @@
 import Utils from './utils/utils';
+import RSVP from 'rsvp';
 
 function ListItems(listTitle) {
     var site = this,
@@ -13,7 +14,7 @@ function ListItems(listTitle) {
     };
 
     methods.queryCSOM = function(camlQuery) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             var ctx = new SP.ClientContext(site.url),
                 list = ctx.get_web().get_lists().getByTitle(listTitle),
                 query;

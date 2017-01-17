@@ -1,8 +1,9 @@
 import Utils from './utils';
+import RSVP from 'rsvp';
 
 class Request {
     static get(url, cacheResult) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             var cache = Utils.Storage.get('SPOC-' + url);
 
             if (cache && cacheResult) {
@@ -67,7 +68,7 @@ class Request {
     };
 
     static post(url, data, isFile) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             if (!Utils.Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
                 url = Utils.Url.convertToXDomain(url);
 
@@ -134,7 +135,7 @@ class Request {
     };
 
     static put(url, data) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             if (!Utils.Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
                 url = Utils.Url.convertToXDomain(url);
 
@@ -196,7 +197,7 @@ class Request {
     };
 
     static delete(url, data) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             if (!Utils.Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
                 url = Utils.Url.convertToXDomain(url);
 
@@ -256,7 +257,7 @@ class Request {
     };
 
     static loadRequestor(url) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             var script = document.createElement('script');
 
             script.src = url;

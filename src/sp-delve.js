@@ -1,11 +1,12 @@
 import Utils from './utils/utils';
+import RSVP from 'rsvp';
 
 function Delve(userEmail) {
     var site = this,
         methods = {};
 
     methods.board = function(searchTerm, actions, cache) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             var searchUrl, actor;
 
             if (!searchTerm) {

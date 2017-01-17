@@ -1,4 +1,5 @@
 import Utils from './utils/utils';
+import RSVP from 'rsvp';
 
 function Files(filePath) {
     var site = this,
@@ -14,7 +15,7 @@ function Files(filePath) {
     };
 
     methods.uploadViaModal = function(GUID) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             var dialogOptions = {};
 
             dialogOptions.url = site.url + "/_layouts/Upload.aspx?List=" + GUID + "&IsDlg=1";
@@ -28,7 +29,7 @@ function Files(filePath) {
     };
 
     methods.upload = function(fileInput, expand) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             var reader = new FileReader();
 
             reader.onloadend = function(e) {
@@ -54,7 +55,7 @@ function Files(filePath) {
     };
 
     methods.uploadFile = function(file, expand) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             var reader = new FileReader();
 
             reader.onloadend = function(e) {                

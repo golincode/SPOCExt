@@ -1,11 +1,12 @@
 import Utils from './utils/utils';
+import RSVP from 'rsvp';
 
 function Search(searchTerm) {
     var site = this,
         methods = {};
 
     methods.query = function(settings, cache) {
-        return new Promise(function(resolve, reject) {
+        return new RSVP.Promise(function(resolve, reject) {
             var searchUrl = site.url + '/_api/search/query?querytext=%27' + searchTerm + 
                                 ' +path:' + site.url + '%27';
 
