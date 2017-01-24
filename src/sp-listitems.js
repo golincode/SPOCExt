@@ -48,7 +48,7 @@ function ListItems(listTitle) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29/items',
             defaults = {
                 __metadata: {
-                    'type': SP.getListItemType(listTitle, library)
+                    'type': Utils.SP.getListItemType(listTitle, library)
                 }
             };
 
