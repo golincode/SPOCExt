@@ -109,10 +109,6 @@ class Request {
                 req.setRequestHeader("X-RequestDigest", document.getElementById('__REQUESTDIGEST').value);
                 req.setRequestHeader("Content-Type", "application/json;odata=verbose");
 
-                if (isFile) {
-                    req.setRequestHeader("content-length", data.byteLength);
-                }
-
                 req.onreadystatechange = function() {
                     if (req.readyState === 4) {
                         if (req.status === 200 || req.status === 201 || req.status === 1223) {
