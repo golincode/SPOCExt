@@ -1,6 +1,6 @@
 {
   "name": "SPOCExt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Produce universal library with webpack and es6",
   "main": "lib/SPOCExt.js",
   "scripts": {
