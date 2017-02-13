@@ -28,7 +28,7 @@ function Lists(listTitle) {
         return Utils.Request.post(site.url + '/_api/web/lists', defaults);
     };
 
-    methods.update = function(data) {
+    methods.update = function(settings) {
         var listUrl = site.url + '/_api/web/lists/getByTitle%28%27' + listTitle + '%27%29',
             defaults = {
                 __metadata: {
@@ -36,8 +36,8 @@ function Lists(listTitle) {
                 }
             };
 
-        if (data) {
-            defaults = Utils.Objects.merge(defaults, data);
+        if (settings) {
+            defaults = Utils.Objects.merge(defaults, settings);
         }
 
         return Utils.Request.put(listUrl, defaults);

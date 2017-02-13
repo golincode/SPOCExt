@@ -1,13 +1,4 @@
 class Storage {
-    static get(key, useLocalStorage) {
-        if (this.storageAvailable()) {
-            var storageObj = useLocalStorage ? localStorage : sessionStorage;
-
-            return JSON.parse(storageObj.getItem(key));
-        }
-        return null;
-    };
-
     static storageAvailable() {
         return (typeof(Storage) !== 'undefined');
     };
