@@ -14,8 +14,9 @@ class Storage {
     static get(key, useLocalStorage) {
         if (this.storageAvailable()) {
             var storageObj = useLocalStorage ? localStorage : sessionStorage;
+            var item = storageObj.getItem(key);
 
-            return JSON.parse(storageObj.getItem(key));
+            return item ? JSON.parse(item) : null;
         }
         return null;
     };
