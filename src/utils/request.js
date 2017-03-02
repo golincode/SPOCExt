@@ -52,7 +52,7 @@ class Request {
                                 resolve(data);
                             } 
                             else {
-                                reject(Error(JSON.parse(req.statusText)));
+                                reject(req);
                             }
                         }
                     };
@@ -115,7 +115,7 @@ class Request {
                             resolve(data);
                         } 
                         else {
-                            reject(Error(req.statusText));
+                            reject(req);
                         }
                     }
                 };
@@ -178,7 +178,7 @@ class Request {
                             resolve(data);
                         } 
                         else {
-                            reject(Error(req.statusText));
+                            reject(req);
                         }
                     }
                 };
@@ -238,7 +238,7 @@ class Request {
                             resolve(data);
                         } 
                         else {
-                            reject(Error(req.statusText));
+                            reject(req);
                         }
                     }
                 };
