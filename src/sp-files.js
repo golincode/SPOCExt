@@ -3,104 +3,109 @@ import RSVP from 'rsvp';
 
 function Files(filePath) {
     var site = this,
-        methods = {};
+    methods = {};
 
     methods.generateExternalLink = function(hours) {
         hours = hours ? hours : 24;
 
         var listUrl = site.url + "/_api/Web/GetFileByServerRelativeUrl('" + filePath + 
-                        "')/GetPreAuthorizedAccessUrl(" + hours + ")";
+            "')/GetPreAuthorizedAccessUrl(" + hours + ")";
 
-        return Utils.Request.get(listUrl, true);
-    };
+return Utils.Request.get(listUrl, true);
+};
 
-    methods.uploadViaModal = function(GUID) {
-        return new RSVP.Promise(function(resolve, reject) {
-            var dialogOptions = {};
+methods.uploadViaModal = function(GUID, returnResultBool) {
+    return new RSVP.Promise(function(resolve, reject) {
+        var dialogOptions = {};
 
-            dialogOptions.url = site.url + "/_layouts/Upload.aspx?List=" + GUID + "&IsDlg=1";
+        dialogOptions.url = site.url + "/_layouts/Upload.aspx?List=" + GUID + "&IsDlg=1";
 
-            dialogOptions.dialogReturnValueCallback = Function.createDelegate(null, function(result, value) {
-                resolve(value, result);
-            });
-
-            SP.UI.ModalDialog.showModalDialog(dialogOptions);
+        dialogOptions.dialogReturnValueCallback = Function.createDelegate(null, function(result, value) {
+            if (returnResultBool) {
+                resolve(result);
+            }
+            else {
+                resolve(value);
+            }
         });
-    };
 
-    methods.upload = function(fileInput, expand) {
-        return new RSVP.Promise(function(resolve, reject) {
-            var reader = new FileReader();
+        SP.UI.ModalDialog.showModalDialog(dialogOptions);
+    });
+};
 
-            reader.onloadend = function(e) {
-                var parts = fileInput.value.split('\\'),
-                    fileName = parts[parts.length - 1],
-                    url = site.url + "/_api/Web/GetFolderByServerRelativeUrl('" + filePath + 
-                            "')/files/add(overwrite=true, url='" + fileName + "')" + 
-                                (expand ? "?$" + expand : "");
+methods.upload = function(fileInput, expand) {
+    return new RSVP.Promise(function(resolve, reject) {
+        var reader = new FileReader();
 
-                Utils.Request.post(url, e.target.result, true).then(function(result) {
-                    resolve(result);
-                }, function(result) {
-                    reject(result);
-                });
-            };
+        reader.onloadend = function(e) {
+            var parts = fileInput.value.split('\\'),
+            fileName = parts[parts.length - 1],
+            url = site.url + "/_api/Web/GetFolderByServerRelativeUrl('" + filePath + 
+                "')/files/add(overwrite=true, url='" + fileName + "')" + 
+    (expand ? "?$" + expand : "");
 
-            reader.onerror = function(e) {
-                reject(e.target.error);
-            };
+    Utils.Request.post(url, e.target.result, true).then(function(result) {
+        resolve(result);
+    }, function(result) {
+        reject(result);
+    });
+};
 
-            reader.readAsArrayBuffer(fileInput.files[0]);
-        });
-    };
+reader.onerror = function(e) {
+    reject(e.target.error);
+};
 
-    methods.uploadFile = function(file, expand) {
-        return new RSVP.Promise(function(resolve, reject) {
-            var reader = new FileReader();
+reader.readAsArrayBuffer(fileInput.files[0]);
+});
+};
 
-            reader.onloadend = function(e) {                
-                var fileName = file ? file.name : "",
-                    url = site.url + "/_api/Web/GetFolderByServerRelativeUrl('" + filePath + 
-                            "')/files/add(overwrite=true, url='" + fileName + "')" + 
-                                (expand ? "?$" + expand : "");
+methods.uploadFile = function(file, expand) {
+    return new RSVP.Promise(function(resolve, reject) {
+        var reader = new FileReader();
 
-                Utils.Request.post(url, e.target.result, true).then(function(result) {
-                    resolve(result);
-                }, function(result) {
-                    reject(result);
-                });
-            };
+        reader.onloadend = function(e) {                
+            var fileName = file ? file.name : "",
+            url = site.url + "/_api/Web/GetFolderByServerRelativeUrl('" + filePath + 
+                "')/files/add(overwrite=true, url='" + fileName + "')" + 
+    (expand ? "?$" + expand : "");
 
-            reader.onerror = function(e) {
-                reject(e.target.error);
-            };
+    Utils.Request.post(url, e.target.result, true).then(function(result) {
+        resolve(result);
+    }, function(result) {
+        reject(result);
+    });
+};
 
-            reader.readAsArrayBuffer(file);
-        });
-    };
+reader.onerror = function(e) {
+    reject(e.target.error);
+};
 
-    methods.query = function(cache) {
-        var url = site.url + "/_api/web/getfilebyserverrelativeurl('" + filePath + "')/ListItemAllFields";
+reader.readAsArrayBuffer(file);
+});
+};
 
-        return Utils.Request.get(url, cache);
-    };
+methods.query = function(cache) {
+    var url = site.url + "/_api/web/getfilebyserverrelativeurl('" + filePath + "')/ListItemAllFields";
 
-    methods.download = function() {
-        window.open('/_layouts/download.aspx?SourceUrl=' + site.url + filePath);
-    };
+    return Utils.Request.get(url, cache);
+};
 
-    methods.openInWebApps = function(newTab) {
-        var url = site.url + filePath;
+methods.download = function() {
+    window.open('/_layouts/download.aspx?SourceUrl=' + site.url + filePath);
+};
 
-        if (newTab) {
-            window.open(Utils.SP.convertToWebApp(url));
-        } 
-        else {
-            window.location.href = Utils.SP.convertToWebApp(url);
-        }
-    };
+methods.openInWebApps = function(newTab) {
+    var url = site.url + filePath;
 
-    return methods;
+    if (newTab) {
+        window.open(Utils.SP.convertToWebApp(url));
+    } 
+    else {
+        window.location.href = Utils.SP.convertToWebApp(url);
+    }
+};
+
+return methods;
 };
 
 export default Files;
