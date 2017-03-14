@@ -21,7 +21,7 @@ function Files(filePath) {
             dialogOptions.url = site.url + "/_layouts/Upload.aspx?List=" + GUID + "&IsDlg=1";
 
             dialogOptions.dialogReturnValueCallback = Function.createDelegate(null, function(result, value) {
-                resolve(value);
+                resolve(value, result);
             });
 
             SP.UI.ModalDialog.showModalDialog(dialogOptions);
