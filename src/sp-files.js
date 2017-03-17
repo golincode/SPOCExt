@@ -28,7 +28,7 @@ function Files(filePath) {
         });
     };
 
-    methods.upload = function(fileInput, expand) {
+    methods.upload = function(fileInput, expand, progressFunction, self) {
         return new RSVP.Promise(function(resolve, reject) {
             var reader = new FileReader();
 
@@ -39,7 +39,7 @@ function Files(filePath) {
                             "')/files/add(overwrite=true, url='" + fileName + "')" + 
                                 (expand ? "?$" + expand : "");
 
-                Utils.Request.post(url, e.target.result, true).then(function(result) {
+                Utils.Request.post(url, e.target.result, true, progressFunction, self).then(function(result) {
                     resolve(result);
                 }, function(result) {
                     reject(result);

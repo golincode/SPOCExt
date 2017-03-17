@@ -67,7 +67,7 @@ class Request {
         });
     };
 
-    static post(url, data, isFile) {
+    static post(url, data, isFile, progressFunction, self) {
         return new RSVP.Promise(function(resolve, reject) {
             if (!Utils.Url.isSameDomain(url) && url.toLowerCase().indexOf('_api/web') > -1) {
                 url = Utils.Url.convertToXDomain(url);
@@ -118,6 +118,22 @@ class Request {
                             reject(req);
                         }
                     }
+                };
+
+                if (progressFunction) {
+                    req.upload.addEventListener("progress", function(e) {
+                        if (e.lengthComputable) {
+                            progressFunction(e, self);
+                        }
+                    }, false);
+                }
+
+                req.onloadstart = function (e) {
+                    console.log("start");
+                };
+
+                req.onloadend = function (e) {
+                    console.log("end");
                 };
 
                 req.onerror = function(err) {
