@@ -128,14 +128,6 @@ class Request {
                     }, false);
                 }
 
-                req.onloadstart = function (e) {
-                    console.log("start");
-                };
-
-                req.onloadend = function (e) {
-                    console.log("end");
-                };
-
                 req.onerror = function(err) {
                     reject(Error('Network Error'));
                 };
