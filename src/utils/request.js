@@ -46,9 +46,9 @@ class Request {
                                 var data = JSON.parse(req.responseText);
 
                                 data = data.d.results ? data.d.results : data.d;
-
-                                Utils.Storage.set('SPOC-' + url, data);
-
+                                if (cacheResult) {
+                                    Utils.Storage.set('SPOC-' + url, data);
+                                }
                                 resolve(data);
                             } 
                             else {
